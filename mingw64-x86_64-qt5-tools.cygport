@@ -1,8 +1,8 @@
-CROSS_HOST="x86_64-w64-mingw32"
-inherit cross qt5-qmake
+TOOLCHAIN_TARGET="x86_64-w64-mingw32"
+inherit toolchain qt5-qmake
 
 NAME="mingw64-x86_64-qt5-tools"
-VERSION=5.3.2
+VERSION=5.4.2
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Qt5 development tools for Win64 toolchain"
@@ -14,7 +14,10 @@ investments made on one platform across many others."
 HOMEPAGE="http://qt-project.org/"
 SRC_URI="http://download.qt-project.org/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qttools-opensource-src-${VERSION}.tar.xz"
 SRC_DIR="qttools-opensource-src-${VERSION}"
-PATCH_URI="5.2.0-uitools-depends.patch"
+PATCH_URI="
+	5.4.1-uitools-shared.patch
+	5.4.2-cygwin-std-fputs.patch
+"
 
 src_install() {
 	local x xname
@@ -23,11 +26,11 @@ src_install() {
 	qt5_qmake_install
 
 	dodir /usr/bin
-	for x in ${D}/usr/lib/qt5/${CROSS_HOST}/bin/*.exe
+	for x in ${D}/usr/lib/qt5/${TOOLCHAIN_TARGET}/bin/*.exe
 	do
-		dosym ../${x#${D}/usr/} /usr/bin/${CROSS_HOST}-$(basename ${x} .exe)-qt5
+		dosym ../${x#${D}/usr/} /usr/bin/${TOOLCHAIN_TARGET}-$(basename ${x} .exe)-qt5
 	done
-	for x in ${D}${CROSS_BINDIR}/*.exe
+	for x in ${D}${TOOLCHAIN_BINDIR}/*.exe
 	do
 		mv ${x} ${x%.exe}-qt5.exe
 	done

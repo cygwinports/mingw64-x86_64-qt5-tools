@@ -1,0 +1,23 @@
+--- origsrc/qttools-opensource-src-5.4.2/src/windeployqt/main.cpp	2015-05-29 15:31:23.000000000 -0500
++++ src/qttools-opensource-src-5.4.2/src/windeployqt/main.cpp	2015-07-13 10:51:57.416942700 -0500
+@@ -1338,7 +1338,7 @@ int main(int argc, char **argv)
+         if (result & CommandLineParseError)
+             std::wcerr << errorMessage << "\n\n";
+         if (result & CommandLineParseHelpRequested)
+-            std::fputs(qPrintable(helpText(parser)), stdout);
++            fputs(qPrintable(helpText(parser)), stdout);
+         if (result & CommandLineParseError)
+             return 1;
+         if (result & CommandLineParseHelpRequested)
+@@ -1397,9 +1397,9 @@ int main(int argc, char **argv)
+ 
+     if (options.json) {
+         if (options.list)
+-            std::fputs(options.json->toList(options.list, options.directory).constData(), stdout);
++            fputs(options.json->toList(options.list, options.directory).constData(), stdout);
+         else
+-            std::fputs(options.json->toJson().constData(), stdout);
++            fputs(options.json->toJson().constData(), stdout);
+         delete options.json;
+         options.json = 0;
+     }
