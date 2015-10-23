@@ -2,7 +2,7 @@ TOOLCHAIN_TARGET="x86_64-w64-mingw32"
 inherit toolchain qt5-qmake
 
 NAME="mingw64-x86_64-qt5-tools"
-VERSION=5.4.2
+VERSION=5.5.1
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Qt5 development tools for Win64 toolchain"
