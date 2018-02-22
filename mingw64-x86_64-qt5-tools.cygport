@@ -2,7 +2,7 @@ TOOLCHAIN_TARGET="x86_64-w64-mingw32"
 inherit toolchain qt5-qmake
 
 NAME="mingw64-x86_64-qt5-tools"
-VERSION=5.9.3
+VERSION=5.9.4
 RELEASE=1
 CATEGORY="Devel"
 SUMMARY="Qt5 development tools for Win64 toolchain"
@@ -20,6 +20,8 @@ PATCH_URI="
 
 # this is mostly cross-compiled, the native tools are only a small part
 RESTRICT="debuginfo"
+CFLAGS+=" -fno-stack-protector"
+CXXFLAGS+=" -fno-stack-protector"
 
 # native objdump cannot read PE+ binaries :-(
 if defined ARCH_i686
